@@ -33,6 +33,9 @@ class IntegralCalculatorTest {
         this.thr = 10;
         this.execute_threads_test();
         this.execute_futures_test();
+        this.thr = 20;
+        this.execute_threads_test();
+        this.execute_futures_test();
         this.thr = 50;
         this.execute_threads_test();
         this.execute_futures_test();
