@@ -90,14 +90,21 @@ public class Integral {
         for (Callable<?> callable : tasks) {
             futures.add(executor.submit(callable));
         }
-        double summary = futures.stream().mapToDouble(f -> {
-            try {
-                return (double) f.get();
-            } catch (ExecutionException | InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }).sum();
 
+//        double summary = futures.stream().mapToDouble(f -> {
+//            try {
+//                return (double) f.get();
+//            } catch (ExecutionException | InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }).sum();
+        try {
+            for (Future<?> f : futures) {
+                f.get();
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this.h * (this.border + shared_res.getResult());
     }
 
